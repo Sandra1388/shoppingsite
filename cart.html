@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Cart - HomeDecor</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg p-3">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">HomeDecor</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container" style="padding-top:18px">
+  <h3>Your Cart</h3>
+  <div id="cartContainer" style="margin-top:12px"></div>
+
+  <div style="margin-top:20px;max-width:420px">
+    <div class="card card-body">
+      <div class="d-flex justify-content-between mb-2"><span>Subtotal</span><span id="subtotal">₹0</span></div>
+      <div class="d-flex justify-content-between mb-2"><span>Shipping</span><span id="shipping">₹50</span></div>
+      <div class="d-flex justify-content-between mb-2"><span>Tax (10%)</span><span id="tax">₹0</span></div>
+      <hr>
+      <div class="d-flex justify-content-between fw-bold fs-5"><span>Total</span><span id="total">₹0</span></div>
+      <button id="checkoutBtn" class="btn-cta" style="width:100%;margin-top:12px">Checkout</button>
+    </div>
+  </div>
+</div>
+
+<div id="successSnackbar" class="snackbar snackbar-success"></div>
+<div id="errorSnackbar" class="snackbar snackbar-error"></div>
+
+<script src="app.js"></script>
+<script>
+  function renderCart(){
+    const cart = ShopApp.getCart();
+    const container = document.getElementById('cartContainer');
+    container.innerHTML = '';
+    if(!cart.length){
+      container.innerHTML = '<div class="text-muted">Your cart is empty. <a href="shop.html">Shop now</a></div>';
+    } else {
+      cart.forEach((it, idx)=>{
+        const div = document.createElement('div');
+        div.className = 'card mb-2';
+        div.innerHTML = `
+          <div class="card-body d-flex gap-10">
+            <img src="${it.image}" style="width:90px;height:70px;object-fit:cover;border-radius:8px">
+            <div style="flex:1">
+              <div style="font-weight:700">${it.name}</div>
+              <div class="text-muted">${ShopApp.formatPrice(it.price)}</div>
+            </div>
+            <div style="text-align:right">
+              <div style="margin-bottom:8px">Qty: ${it.quantity}</div>
+              <div style="font-weight:700">${ShopApp.formatPrice(it.price * it.quantity)}</div>
+              <button data-idx="${idx}" class="btn btn-link text-danger removeBtn">Remove</button>
+            </div>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+      // attach remove handlers
+      document.querySelectorAll('.removeBtn').forEach(b=>{
+        b.addEventListener('click', (e)=>{
+          const i = Number(e.target.dataset.idx);
+          const cart = ShopApp.getCart();
+          cart.splice(i,1);
+          ShopApp.saveCart(cart);
+          updateSummary();
+          renderCart();
+          ShopApp.updateCartBadge();
+        });
+      });
+    }
+  }
+
+  function updateSummary(){
+    const cart = ShopApp.getCart();
+    const subtotal = cart.reduce((s,i)=>s+i.price*i.quantity,0);
+    const shipping = cart.length ? 50 : 0;
+    const tax = Math.round(subtotal * 0.1);
+    const total = subtotal + shipping + tax;
+    document.getElementById('subtotal').innerText = ShopApp.formatPrice(subtotal);
+    document.getElementById('shipping').innerText = ShopApp.formatPrice(shipping);
+    document.getElementById('tax').innerText = ShopApp.formatPrice(tax);
+    document.getElementById('total').innerText = ShopApp.formatPrice(total);
+  }
+
+  document.getElementById && document.addEventListener('DOMContentLoaded', ()=>{
+    renderCart();
+    updateSummary();
+    ShopApp.updateCartBadge();
+    document.getElementById('checkoutBtn').addEventListener('click', ()=>{
+      const cart = ShopApp.getCart();
+      if(!cart.length) { ShopApp.showSnackbar('Cart empty','error'); return; }
+      alert('Order placed! Thank you :)');
+      ShopApp.saveCart([]);
+      renderCart(); updateSummary(); ShopApp.updateCartBadge();
+      ShopApp.showSnackbar('Order placed','success');
+    });
+  });
+</script>
+</body>
+</html>

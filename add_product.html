@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Add Product - HomeDecor</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg p-3">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">HomeDecor</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+        <li class="nav-item"><button class="nav-link btn btn-link" id="logoutBtn">Logout</button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="form-section" style="max-width:720px;margin:22px auto">
+    <h3>Add New Product</h3>
+    <form id="addProductForm">
+      <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input id="name" class="material-input" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Description</label>
+        <textarea id="desc" class="material-input" rows="3" required></textarea>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Price (₹)</label>
+        <input id="price" type="number" class="material-input" min="1" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Image URL</label>
+        <input id="image" type="url" class="material-input" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Category</label>
+        <select id="category" class="material-input" required>
+          <option value="">Select</option>
+          <option value="Lamps">Lamps</option>
+          <option value="Wall Art">Wall Art</option>
+        </select>
+      </div>
+
+      <button class="btn-cta" type="submit">Add Product</button>
+    </form>
+  </div>
+</div>
+
+<div id="successSnackbar" class="snackbar snackbar-success"></div>
+<div id="errorSnackbar" class="snackbar snackbar-error"></div>
+
+<script src="app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', ()=>{
+    // Auth check
+    const user = ShopApp.currentUser();
+    if(!user || user.email!=='admin@gmail.com'){
+      alert('Access denied. Admins only.');
+      location.href='shop.html';
+      return;
+    }
+    document.getElementById('logoutBtn').addEventListener('click', ()=>{
+      localStorage.removeItem('loggedInUser'); localStorage.removeItem('currentUser'); location.href='login.html';
+    });
+
+    document.getElementById('addProductForm').addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const desc = document.getElementById('desc').value.trim();
+      const price = Number(document.getElementById('price').value);
+      const image = document.getElementById('image').value.trim();
+      const category = document.getElementById('category').value;
+      if(!name||!desc||!price||!image||!category){ ShopApp.showSnackbar?.('Please fill all fields','error'); return; }
+
+      const products = ShopApp.getProducts();
+      const newP = { id: ShopApp.generateId(), name, description:desc, price, image, category };
+      products.push(newP);
+      ShopApp.saveProducts(products);
+      ShopApp.showSnackbar?.('Product added','success');
+      setTimeout(()=>location.href='shop.html',900);
+    });
+  });
+</script>
+</body>
+</html>
