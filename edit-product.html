@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product - Home Decors</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold text-primary" href="home.html">
+                <i class="fas fa-home me-2"></i>Home Decors
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">
+                            <i class="fas fa-home me-1"></i>Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shop.html">
+                            <i class="fas fa-shopping-bag me-1"></i>Shop
+                        </a>
+                    </li>
+                    <li class="nav-item" id="adminNav">
+                        <a class="nav-link" href="add-product.html">
+                            <i class="fas fa-plus-circle me-1"></i>Add Product
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart.html">
+                            <i class="fas fa-shopping-cart me-1"></i>Cart <span class="badge bg-danger" id="cartBadge">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-danger btn-sm" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt me-1"></i>Logout
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="bg-light py-4 mb-4">
+        <div class="container">
+            <h1 class="fw-bold"><i class="fas fa-edit text-primary me-2"></i>Edit Product</h1>
+            <p class="text-muted">Update product details</p>
+        </div>
+    </div>
+
+    <!-- Form Container -->
+    <div class="container pb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-lg material-card">
+                    <div class="card-body p-5">
+                        <form id="editProductForm" novalidate>
+                            <div class="mb-3">
+                                <label for="productName" class="form-label fw-bold">Product Name</label>
+                                <input type="text" class="form-control material-input" id="productName" placeholder="e.g., Modern Table Lamp" required>
+                                <div class="invalid-feedback" id="nameError"></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="productPrice" class="form-label fw-bold">Price (₹)</label>
+                                <input type="number" class="form-control material-input" id="productPrice" placeholder="0.00" min="0" step="0.01" required>
+                                <div class="invalid-feedback" id="priceError"></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="productDescription" class="form-label fw-bold">Description</label>
+                                <textarea class="form-control material-input" id="productDescription" rows="4" placeholder="Describe your product" required></textarea>
+                                <div class="invalid-feedback" id="descError"></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="productCategory" class="form-label fw-bold">Category</label>
+                                <select class="form-select material-input" id="productCategory" required>
+                                    <option value="">Select a category</option>
+                                    <option value="lamps">Lamps</option>
+                                    <option value="walls">Wall Decorations</option>
+                                </select>
+                                <div class="invalid-feedback" id="categoryError"></div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="productImage" class="form-label fw-bold">Product Image</label>
+                                <select class="form-select material-input" id="productImage" required>
+                                    <option value="">Select an image</option>
+                                    <option value="lamp1.jpeg">Lamp 1</option>
+                                    <option value="lamp5.jpeg">Lamp 5</option>
+                                    <option value="wall1.jpeg">Wall Decoration 1</option>
+                                    <option value="wall2.jpeg">Wall Decoration 2</option>
+                                    <option value="wall3.jpeg">Wall Decoration 3</option>
+                                    <option value="wall4.jpeg">Wall Decoration 4</option>
+                                    <option value="wall5.jpeg">Wall Decoration 5</option>
+                                    <option value="wall6.jpeg">Wall Decoration 6</option>
+                                    <option value="wall7.jpeg">Wall Decoration 7</option>
+                                </select>
+                                <div class="invalid-feedback" id="imageError"></div>
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-flex">
+                                <button type="submit" class="btn btn-success btn-lg material-button fw-bold">
+                                    <i class="fas fa-save me-2"></i>Update Product
+                                </button>
+                                <a href="shop.html" class="btn btn-outline-secondary btn-lg material-button fw-bold">
+                                    <i class="fas fa-times me-2"></i>Cancel
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Snackbar -->
+    <div id="snackbar" class="snackbar"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="js/db.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/edit-product.js"></script>
+</body>
+</html>

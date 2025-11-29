@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - Home Decors</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body style="background-color: #F3E5FF;">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold text-primary" href="home.html">
+                <i class="fas fa-home me-2"></i>Home Decors
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">
+                            <i class="fas fa-home me-1"></i>Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="shop.html">
+                            <i class="fas fa-shopping-bag me-1"></i>Shop
+                        </a>
+                    </li>
+                    <li class="nav-item" id="adminNav" style="display: none;">
+                        <a class="nav-link" href="add-product.html">
+                            <i class="fas fa-plus-circle me-1"></i>Add Product
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart.html">
+                            <i class="fas fa-shopping-cart me-1"></i>Cart <span class="badge bg-danger" id="cartBadge">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-danger btn-sm" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt me-1"></i>Logout
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Shop Header -->
+    <div class="bg-light py-4">
+        <div class="container">
+            <h1 class="fw-bold">Shop Our Collections</h1>
+            <p class="text-muted">Browse and add items to your cart</p>
+        </div>
+    </div>
+
+    <!-- Admin Toolbar (visible to admins only) -->
+    <div class="container py-2" id="adminToolbar" style="display: none;">
+        <div class="d-flex justify-content-end">
+            <a href="add-product.html" class="btn btn-success me-2" id="adminAddBtn">
+                <i class="fas fa-plus me-1"></i> Add Product
+            </a>
+            <button class="btn btn-outline-danger" id="resetProductsBtn">
+                <i class="fas fa-redo me-1"></i> Reset Products
+            </button>
+        </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="container py-4">
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="btn-group w-100" role="group">
+                    <button type="button" class="btn btn-outline-primary filter-btn active" data-filter="all">
+                        All Products
+                    </button>
+                    <button type="button" class="btn btn-outline-warning filter-btn" data-filter="lamps">
+                        Lamps
+                    </button>
+                    <button type="button" class="btn btn-outline-info filter-btn" data-filter="walls">
+                        Wall Decor
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="container pb-5">
+        <div class="row g-4" id="productsContainer">
+            <!-- Products will be loaded here -->
+        </div>
+        <div id="noProducts" class="alert alert-info text-center py-5" style="display: none;">
+            <i class="fas fa-info-circle me-2"></i>No products found
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <p class="mb-0">&copy; 2025 Home Decors. All rights reserved.</p>
+    </footer>
+
+    <!-- Snackbar -->
+    <div id="snackbar" class="snackbar"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="js/db.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/shop.js"></script>
+</body>
+</html>

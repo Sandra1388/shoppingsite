@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Home Decors</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="auth-container-split">
+        <!-- Left Section - Form -->
+        <div class="auth-left-section">
+            <div class="auth-form-wrapper">
+                <h2 class="auth-form-title">Log In To Your</h2>
+                <h2 class="auth-form-title" style="margin-bottom: 8px;">Account</h2>
+                <p class="auth-form-subtitle">Check your order status, update your billing info, and review past purchases.</p>
+
+                <form id="loginForm" novalidate>
+                    <div class="auth-form-group-split">
+                        <label for="loginEmail">Email *</label>
+                        <input type="email" class="auth-form-input-split" id="loginEmail" placeholder="youremail@gmail.com" required>
+                        <div class="invalid-feedback" id="emailError"></div>
+                    </div>
+
+                    <div class="auth-form-group-split">
+                        <label for="loginPassword">Password*</label>
+                        <input type="password" class="auth-form-input-split" id="loginPassword" placeholder="youremail@gmail.com" required>
+                        <div class="invalid-feedback" id="passwordError"></div>
+                    </div>
+
+                    <a href="#" style="color: #0f5d4a; text-decoration: none; font-size: 14px; display: block; margin-bottom: 20px;">Forgot Password</a>
+
+                    <button type="submit" class="auth-submit-btn-split">
+                        LOG IN
+                    </button>
+                </form>
+
+                <div class="auth-footer-split">
+                    <p>Don't have an account? <a href="register.html">Sign Up</a></p>
+                </div>
+
+                
+            </div>
+        </div>
+
+        <!-- Right Section - Image -->
+        <div class="auth-right-section">
+            <img src="images/login1.jpg" alt="Home Decors" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+    </div>
+
+    <!-- Snackbar -->
+    <div id="snackbar" class="snackbar"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="js/db.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>

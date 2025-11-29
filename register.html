@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Home Decors</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="auth-container-split">
+        <!-- Left Section - Form -->
+        <div class="auth-left-section">
+            <div class="auth-form-wrapper">
+                <h2 class="auth-form-title">Create Your</h2>
+                <h2 class="auth-form-title" style="margin-bottom: 8px;">Account</h2>
+                <p class="auth-form-subtitle">Join Home Decors and start shopping for premium home decorations today.</p>
+
+                <form id="registerForm" novalidate>
+                    <div class="auth-form-group-split">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" class="auth-form-input-split" id="fullName" placeholder="Enter your full name" required>
+                        <div class="invalid-feedback" id="nameError"></div>
+                    </div>
+
+                    <div class="auth-form-group-split">
+                        <label for="email">Email Address</label>
+                        <input type="email" class="auth-form-input-split" id="email" placeholder="Enter your email" required>
+                        <div class="invalid-feedback" id="emailError"></div>
+                    </div>
+
+                    <div class="auth-form-group-split">
+                        <label for="password">Password</label>
+                        <input type="password" class="auth-form-input-split" id="password" placeholder="At least 6 characters" required>
+                        <div class="invalid-feedback" id="passwordError"></div>
+                    </div>
+
+                    <div class="auth-form-group-split">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" class="auth-form-input-split" id="confirmPassword" placeholder="Confirm your password" required>
+                        <div class="invalid-feedback" id="confirmError"></div>
+                    </div>
+
+                    <button type="submit" class="auth-submit-btn-split">
+                        SIGN UP
+                    </button>
+                </form>
+
+                <div class="auth-footer-split">
+                    <p>Already have an account? <a href="login.html">Log In</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Section - Image -->
+        <div class="auth-right-section">
+            <img src="images/login1.jpg" alt="Home Decors" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+    </div>
+
+    <!-- Snackbar -->
+    <div id="snackbar" class="snackbar"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="js/db.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/register.js"></script>
+</body>
+</html>
